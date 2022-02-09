@@ -6,10 +6,12 @@ import java.util.List;
 public class CrewCaller {
 	private CrewInventory crewInventory;
 	private NumberLookup numberLookup;
+	private PhoneDialer phoneDialer;
 
-	public CrewCaller( CrewInventory crewInventory, NumberLookup numberLookUp) {
+	public CrewCaller( CrewInventory crewInventory, NumberLookup numberLookUp, PhoneDialer phoneDialer) {
 		this.crewInventory=crewInventory;
 		this.numberLookup=numberLookUp;
+		this.phoneDialer=phoneDialer;
 		
 	}
 
@@ -18,7 +20,8 @@ public class CrewCaller {
 		List <String> crewMembers =this.crewInventory.findCrewsForDate(date);
 		if(crewMembers !=null) {
 		for(String crewMembe:crewMembers) {
-			this.numberLookup.lookupNumber(crewMembe);
+			String foundNumber=this.numberLookup.lookupNumber(crewMembe);
+			this.phoneDialer.dialNumber(foundNumber);
 			
 		}
 		
